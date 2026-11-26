@@ -1,22 +1,34 @@
-prices = {
-"rice": 75,
-"oil": 185,
-"sugar": 120,
-"milk": 95,
-"egg": 12,
-"flour": 65,
-"salt": 40,
-"lentil": 130,
-"potato": 45,
-"onion": 80,
-"tea": 250,
-"coffee": 450,
-"biscuit": 50,
-"soap": 70,
-"shampoo": 180
-}
-def display_products():
-    print("Available Products")
 
-    for item in prices:
-        print(item, ":", prices[item])
+from order import take_order
+from billing import create_bill, display_bill
+
+
+def main():
+
+    # Step 1: Take customer order
+    order = take_order()
+
+    # Step 2: Display combined order
+    print("\nFINAL COMBINED ORDER")
+    print(order)
+
+    # Step 3: Check whether order is empty
+    if not order:
+        print("\nNo valid products were ordered.")
+        return
+
+    # Step 4: Calculate the bill
+    bill, subtotal, discount, vat, final_amount = create_bill(order)
+
+    # Step 5: Display the final bill
+    display_bill(
+        bill,
+        subtotal,
+        discount,
+        vat,
+        final_amount
+    )
+
+
+if __name__ == "__main__":
+    main()
